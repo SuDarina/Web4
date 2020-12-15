@@ -36,7 +36,7 @@ export class UsersHandlerService {
       console.log(request.response);
       ans = request.response;
       console.log('AAAAAAAAAAA ' + ans);
-      if (ans === 'wrong password' || ans === 'not registered'){
+      if (ans === 'wrong password' || ans === 'not registered' || ans === 'error'){
         return(ans);
       }else {
         localStorage.setItem('currentUser', ans);

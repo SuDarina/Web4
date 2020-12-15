@@ -26,7 +26,7 @@ public class SignServlet extends HttpServlet {
         resp.addHeader("Access-Control-Allow-Headers", "Content-Type");
         resp.addHeader("Origin", "http://localhost:3355");
         if (result.equals("not registered")) {
-            resp.setStatus(403);
+            resp.getWriter().write("not registered");
             System.out.println("not registered");
         } else {
             if (result.equals("wrong password")) {

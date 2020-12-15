@@ -23,7 +23,7 @@
   font-size: 15px;
 }
 #theme:hover {
-  box-shadow: 200px 0 0 0 rgba(0,0,0,.3) inset;
+  box-shadow: 250px 0 0 0 rgba(0,0,100,.13) inset;
 }
 .footer{
   width: 100%;

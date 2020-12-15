@@ -26,16 +26,16 @@ export class AuthorizationService {
     request.open('POST', 'http://localhost:8080/Web4-0.1/register', false);
     request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     request.send(arr);
-
-    if ((request.status !== 200) && (request.status !== 403)) {
+    ans = request.responseText;
+    if (ans === 'already registered') {
       console.log( request.status + ': ' + request.statusText );
       console.log(request.response);
       console.log(request.responseText);
+      return 'error';
     } else {
       console.log(request.response);
-      ans = request.response;
+      localStorage.setItem('currentUser', ans);
       console.log('AAAAAAAAAAA ' + ans);
-      this.router.navigate(['/main']);
       return '1';
     }
   }

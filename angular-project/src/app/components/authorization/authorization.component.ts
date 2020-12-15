@@ -23,7 +23,8 @@ export class AuthorizationComponent implements OnInit {
     const ans = this.authService.register(this.user);
     if (!(ans === '1')) {
       this.errormessage = 'user already exist';
+    } else {
+      this.router.navigate(['main']);
     }
-    this.router.navigate(['main']);
   }
 }

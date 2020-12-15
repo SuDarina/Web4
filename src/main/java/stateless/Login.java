@@ -27,7 +27,7 @@ public class Login {
             return user.getUsername();
         } else{
             System.out.println("already registered");
-            return "error";
+            return "already registered";
         }
     }
     public User getUserByUsername(String username){

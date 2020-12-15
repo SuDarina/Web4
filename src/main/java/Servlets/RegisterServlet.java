@@ -22,14 +22,15 @@ public class RegisterServlet extends HttpServlet {
         System.out.println("pas=" + password);
         String usr = login.register(username, password);
         if (usr != null) {
-            if (usr.equals("error")) { //ПОФИКСИТЬ!!!!!!!!!!
-                resp.setStatus(403);
-            }
             resp.addHeader("Access-Control-Allow-Origin", "http://localhost:3355");
             resp.addHeader("Access-Control-Allow-Methods", "GET,POST,OPTIONS,DELETE,PUT");
             resp.addHeader("Access-Control-Allow-Headers", "Content-Type");
             resp.addHeader("Origin", "http://localhost:3350");
-            resp.getWriter().write(usr);
+            if (usr.equals("already registered")) {
+                resp.getWriter().write("already registered");
+            } else {
+                resp.getWriter().write(usr);
+            }
         } else {
             System.out.println("nulllll");
         }
