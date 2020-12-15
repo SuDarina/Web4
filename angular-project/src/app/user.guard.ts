@@ -12,11 +12,12 @@ export class UserGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     const isAuthorized: boolean = !! localStorage.getItem('currentUser');
+    console.log(isAuthorized);
     if (!isAuthorized && state.url.match(/^\/(main|clear)$/ig)){
       this.router.navigate(['/login'], { queryParams: { returnUrl: state.url }});
       return false;
     }else if (isAuthorized && state.url.match(/^\/(login|register)$/ig)){
-      this.router.navigate(['/main'], { queryParams: { returnUrl: state.url }});
+      this.router.navigate(['main']);
       return false;
     }
 

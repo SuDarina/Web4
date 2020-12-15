@@ -17,12 +17,12 @@
   min-width: 220px;
 }
 
-#button{
+#theme{
   width: 15%;
   margin-right: 10px;
   font-size: 15px;
 }
-#button:hover {
+#theme:hover {
   box-shadow: 200px 0 0 0 rgba(0,0,0,.3) inset;
 }
 .footer{

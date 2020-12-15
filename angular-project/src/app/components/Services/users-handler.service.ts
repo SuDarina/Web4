@@ -40,7 +40,7 @@ export class UsersHandlerService {
         return(ans);
       }else {
         localStorage.setItem('currentUser', ans);
-        this.router.navigate(['http://localhost:3355/main']);
+       // this.router.navigate(['http://localhost:3355/#/main']);
         return ('1');
       }
     }

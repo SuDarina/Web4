@@ -9,7 +9,7 @@ import {Router} from '@angular/router';
 export class AuthorizationService {
   constructor(public httpClient: HttpClient,  public router: Router) {
   }
-  public register(user: User): void {
+  public register(user: User): string {
     let ans: string;
     const headers = new HttpHeaders();
     headers.set('Content-Type', 'application/x-www-form-urlencoded');
@@ -36,6 +36,7 @@ export class AuthorizationService {
       ans = request.response;
       console.log('AAAAAAAAAAA ' + ans);
       this.router.navigate(['/main']);
+      return '1';
     }
   }
 }

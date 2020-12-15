@@ -13,7 +13,7 @@ export class TableComponent implements OnInit {
   constructor(private service: PointsHandlerService) { }
 
   ngOnInit(): void {
-    this.service.getPoints().subscribe(data => this.points = data as PointEntity[]);
+    // this.service.getPoints();
   }
 
 }

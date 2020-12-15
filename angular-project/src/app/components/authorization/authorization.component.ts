@@ -1,8 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import {Params, Router} from '@angular/router';
-import {Subscription} from 'rxjs';
-import { UsersHandlerService} from '../Services/users-handler.service';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
 import {User} from '../model/user';
 import {AuthorizationService} from '../Services/authorization.service';
 
@@ -14,13 +11,19 @@ import {AuthorizationService} from '../Services/authorization.service';
 export class AuthorizationComponent implements OnInit {
 
   user: User = new User();
+  errormessage: string;
 
-  constructor(public authService: AuthorizationService) { }
+  constructor(public authService: AuthorizationService, public router: Router) {
+  }
 
   ngOnInit(): void {
   }
 
-  register(): void{
-   this.authService.register(this.user);
+  register(): void {
+    const ans = this.authService.register(this.user);
+    if (!(ans === '1')) {
+      this.errormessage = 'user already exist';
+    }
+    this.router.navigate(['main']);
   }
 }
