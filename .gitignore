@@ -1,0 +1,6 @@
+# Project exclude paths
+/target/
+.idea
+angular-project/e2e
+angular-project/node_modules
+node_installation

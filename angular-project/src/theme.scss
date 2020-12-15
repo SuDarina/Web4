@@ -1,0 +1,59 @@
+html[data-theme='dark'] a {
+  filter: invert(100%) hue-rotate(180deg);
+}
+
+html[data-theme='dark'] {
+  --hue: 210; /* Blue */
+  --accent-hue: 25; /* Orange */
+  --text-color-normal: #f4f4f4;
+  --button-background: #373737;
+  --button-text-color: #f4f4f4;
+  --background: #5d5c5d;
+  --header: #373737;
+  --shadow: #f65a5b;
+  --link: #0ebeff;
+  --hover: #5d5c50;
+  --border: #f4f4f4;
+}
+html[data-theme=''] {
+  --hue: 210; /* Blue */
+  --accent-hue: 25; /* Orange */
+  --text-color-normal: #373737;
+  --button-background: #004eaf;
+  --button-text-color: #f6f6f5;
+  --background: #f6f6f5;
+  --header: #caccd1;
+  --shadow: #373737;
+  --link: #004eaf;
+  --hover: #008;
+  --border: #1da1f2;
+}
+
+body,.table{
+  background: var(--background);
+  color: var(--text-color-normal);
+}
+#button,#signout{
+  background: var(--background);
+  color: var(--text-color-normal);
+  border: 0px;
+  box-shadow: 2px var(--button-text-color);
+}
+/*#button,#signout :hover{
+  background: var(--background);
+  color: var(--text-color-normal);
+}
+#button,#signout:active{
+  border: var(--button-background);
+  background: (--hover);
+}*/
+#header,#footer{
+  background: var(--header) !important;
+  box-shadow: var(--shadow) !important;
+}
+#link:hover{
+  color: var(--link);
+}
+#link{
+  color: var(--text-color-normal);
+}
