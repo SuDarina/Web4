@@ -70,9 +70,12 @@ export class PointsHandlerService {
     const request = new XMLHttpRequest();
     // tslint:disable-next-line:max-line-length
     const arr = 'clear=' + encodeURIComponent('yes');
-    request.open('POST', AppComponent.API_URL + '/clear', true);
+    request.open('POST', AppComponent.API_URL + '/clear', false);
     request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     request.send(arr);
+    console.log(request.response);
+    console.log(request.responseText);
+    // load from bd?
   }
 
   logOut(): void {

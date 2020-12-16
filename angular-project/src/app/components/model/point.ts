@@ -1,7 +1,15 @@
 export class PointEntity {
-  x: number = null;
-  y: number = null;
-  r: number = null;
+  x: number;
+  y: number;
+  r: number;
   result = false;
   username = '';
+  /*constructor(
+    public x: number,
+    public y: number,
+    public r: number,
+    public result: boolean
+  ) {
+
+  }*/
 }

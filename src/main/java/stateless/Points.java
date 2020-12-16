@@ -41,9 +41,9 @@ public class Points {
             return "not valid";
         }
     }
-    public void clear(String username){
+    public int clear(String username){
         System.out.println("points.clear");
-        pointsDB.clear(username);
+        return pointsDB.clear(username);
     }
 
     private boolean validate() {

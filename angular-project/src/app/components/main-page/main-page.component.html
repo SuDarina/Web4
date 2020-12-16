@@ -1,19 +1,19 @@
+
 <div class="text-center" id="content">
   <div class="form-signin">
-    <!--    <img class="mb-4" src="/docs/4.5/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">-->
     <h1 class="h3 mb-3 font-weight-normal">Заполните форму или нажмите на изображение </h1>
     <a id="hiddenButton" style="margin: auto" class="hiddenButton" (click)="click('form')">{{formName}} Form</a>
     <div class="child" style="float: right">
       <button class="btn btn-outline-primary" (click)="logout()" routerLink="/login">Sign out</button>
     </div>
-    <!--    <button id="hiddenCanvas" style="margin: 2px" type="button" class="btn btn-outline-primary hiddenButton" (click)="click('canvas')">Graphic</button>-->
-    <form id="form" #f="ngForm" (ngSubmit)="clickButton()" novalidate>
+    <form id="form" name="pointsform"  #f="ngForm" (ngSubmit)="clickButton()" novalidate>
       <label for="x_in">Введите x:</label><br>
-      <input type="text" id="x_in" placeholder="(-3, 3)" name="x" maxlength="5" [ngModel]="point.x" #x_in (input)="graphic.moveDot(x_in.value, y_in.value, r_in.value)"/><br>
+      <input type="text" id="x_in" placeholder="(-3, 3)" name="x" maxlength="5" #x_in (input)="graphic.moveDot(x_in.value, y_in.value, r_in.value)" [(ngModel)]="point.x" required/><br>
       <label for="y_in">Введите y:</label><br>
-      <input type="text" id="y_in" placeholder="(-3, 3)" name="y" maxlength="5" [ngModel]="point.y" #y_in (input)="graphic.moveDot(x_in.value, y_in.value, r_in.value)"/><br>
+      <input type="text" id="y_in" placeholder="(-3, 3)" name="y" maxlength="5" #y_in (input)="graphic.moveDot(x_in.value, y_in.value, r_in.value)" [(ngModel)]="point.y" required/><br>
       <label for="r_in">Введите r:</label><br>
-      <input type="text" id="r_in" placeholder="(-3, 3)" name="r" maxlength="5" [ngModel]="point.r" #r_in (input)="graphic.moveDot(x_in.value, y_in.value, r_in.value)"/><br><br>
+      <input id="r_in" placeholder="(-3, 3)" name="r" maxlength="5" #r_in (input)="graphic.moveDot(x_in.value, y_in.value, r_in.value)" [(ngModel)]="point.r" #r="ngModel" required pattern="[0-3]"/>
+    <br><br>
       <div style="text-align: center">
         <button id="send" style="margin: 2px" type="submit" class="btn btn-outline-primary">Send</button>
         <button id="clear" (click)="clear()" style="margin: 2px" type="button" class="btn btn-outline-primary">Clear</button>
