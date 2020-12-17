@@ -14,12 +14,14 @@ import {PointsHandlerService} from './components/Services/points-handler.service
 import {TableComponent} from './components/table/table.component';
 import {UserGuard} from './user.guard';
 import {GraphicComponent} from './components/graphic/graphic.component';
+import { NpeComponent } from './components/npe/npe.component';
 
 const appRoutes: Routes = [
   {path: 'main', component: MainPageComponent, canActivate: [UserGuard]},
   {path: 'clear', component: MainPageComponent, canActivate: [UserGuard]},
   {path: 'login', component: LoginComponent, canActivate: [UserGuard]},
   {path: 'register', component: AuthorizationComponent, canActivate: [UserGuard]},
+  {path: 'npe', component: NpeComponent},
   {path: '**', redirectTo: '/login'}
 ];
 export const routing = RouterModule.forRoot(appRoutes);
@@ -30,7 +32,8 @@ export const routing = RouterModule.forRoot(appRoutes);
     AuthorizationComponent,
     LoginComponent,
     TableComponent,
-    GraphicComponent
+    GraphicComponent,
+    NpeComponent
   ],
   imports: [
     BrowserModule,
