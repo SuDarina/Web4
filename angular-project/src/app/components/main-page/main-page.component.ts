@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {PointsHandlerService} from '../Services/points-handler.service';
 import {PointEntity} from '../model/point';
 import {Router} from '@angular/router';
+import {isNumeric} from 'tslint';
 
 @Component({
   selector: 'app-main-page',
@@ -13,7 +14,10 @@ export class MainPageComponent implements OnInit {
   formName: string;
   public points: PointEntity[];
   point: PointEntity = new PointEntity();
-  rErr = '';
+  errorR = '';
+  errorX = '';
+  errorY = '';
+
 
   constructor(public pointsHandlerService: PointsHandlerService, public router: Router) {
   }
@@ -80,11 +84,29 @@ export class MainPageComponent implements OnInit {
     console.log('clicked');
   }
 
+  validateR(): void {
+    this.errorR = this.validateForm(this.point.r);
+  }
+  validateX(): void {
+    this.errorX = this.validateForm(this.point.x);
+  }
+  validateY(): void {
+    this.errorY = this.validateForm(this.point.y);
+  }
+  validateForm(val): string{
+    if (val <= -3 || val >= 3){
+      return 'Значение должно быть (-3..3)';
+    }
+    else{
+      return '';
+    }
+  }
+
   validate(): boolean {
     console.log(this.point);
-    return (this.point.x < 3 && this.point.x > -3)
-      && (this.point.y < 3 && this.point.y > -3)
-      && (this.point.r < 3 && this.point.r > -3);
+    return (this.point.x <= 3 && this.point.x >= -3)
+      && (this.point.y <= 3 && this.point.y >= -3)
+      && (this.point.r <= 3 && this.point.r >= -3);
   }
 
   setResult(): void {
