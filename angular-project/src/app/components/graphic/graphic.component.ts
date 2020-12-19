@@ -1,4 +1,5 @@
 import {AfterViewInit, Component, ElementRef, Output, ViewChild} from '@angular/core';
+import {PointEntity} from "../model/point";
 @Component({
   selector: 'app-graphic',
   templateUrl: './graphic.component.html',
@@ -171,28 +172,38 @@ export class GraphicComponent implements AfterViewInit {
   }
 
   drawDot(cx, cy): void {
-    // const ctx = this.canvas.nativeElement.getContext('2d');
     this.ctx.beginPath();
-    this.ctx.fillStyle = '#5611BE';
+    // this.ctx.fillStyle = '#5611BE';
     this.ctx.arc(cx, cy, this.ctx.canvas.height / 100, 0, Math.PI * 2);
     this.ctx.fill();
   }
 
   moveDot(x, y, r): void {
     this.drawCanvas(r);
+    if (r===''){
+      r = 1;
+    }
     const cxx = (x / r) * (7 * this.ctx.canvas.width / 8 - this.ctx.canvas.width / 2) + this.ctx.canvas.width / 2;
     const cyy = (this.ctx.canvas.height / 2) - (y / r) * (this.ctx.canvas.width / 2 - this.ctx.canvas.height / 8);
     if (this.validate(x, y, r)) {
+      this.ctx.fillStyle = '#5611BE';
       this.drawDot(cxx, cyy);
     }
     console.log(x);
     console.log(y);
+    if (document.getElementById('canvasName').innerText === 'Hide Graphic' && document.body.clientWidth < 700)
+      document.getElementById('canvas').style.display = 'block';
+    else if (document.getElementById('canvasName').innerText === 'Show Graphic' && document.body.clientWidth < 700)
+      document.getElementById('canvas').style.display = 'none';
+    else
+      document.getElementById('canvas').style.display = 'block';
   }
   validate(x, y, r): boolean {
     return (((x > -3) && (x < 3)) && (((y > -3) && (y < 3))) && (((r > -3) && (r < 3))));
   }
 
-  canvasClick(r, xin, yin, rin): void {
+  canvasClick(point: PointEntity, xin, yin, rin): void {
+    let r = rin.value;
     if (r === '') {
       r = 1;
     }
@@ -207,22 +218,39 @@ export class GraphicComponent implements AfterViewInit {
       for (let i = 0; i < 5; i++) {
         newx = newx + x.toString()[i];
       }
-      xin.value = newx;
+      point.x = Number(newx);
     } else {
       xin.value = x.toString();
+      point.x = x;
     }
     if (y.toString().length > 5) {
       for (let i = 0; i < 5; i++) {
         newy = newy + y.toString()[i];
       }
-      yin.value = newy;
+      console.log(newy)
+      console.log(y)
+      yin.value = Number(newy);
+      point.y = Number(newy);
     } else {
       yin.value = y.toString();
+      point.y = y;
     }
     rin.value = r.toString();
+    point.r = r;
     if (this.validate(x, y, r)) {
+      if (this.check(point)){
+        this.ctx.fillStyle = 'green'
+      } else
+        this.ctx.fillStyle = 'darkred';
       this.drawDot(cx, cy);
     }
+
     document.getElementById('send').click();
+  }
+  check(point: PointEntity): boolean{
+    return (point.x < 0 && point.x > -(point.r / 2) && (point.y > 0 && point.y < point.r))
+      || ((((point.x * point.x) + (point.y * point.y)) <= ((point.r * point.r)))
+        && (point.x) > 0 && point.x < point.r)
+      || ((point.x > 0 && point.x < point.r && point.y < (point.x - point.r)));
   }
 }

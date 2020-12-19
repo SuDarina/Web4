@@ -1,1 +1,91 @@
+#send{
+  border: 1px solid darkcyan;
+  color: darkcyan;
 
+}
+#send:hover{
+  border: 1px solid darkcyan;
+  background: darkcyan;
+  color: white;
+}
+
+#content{
+  height: 80%;
+  overflow: scroll;
+}
+
+form, table{
+  margin: auto;
+}
+
+div{
+  height: 100%;
+}
+
+td, th{
+  text-align: center;
+  width: 25%;
+}
+
+#form{
+  display: block;
+}
+
+#canvas{
+  display: block;
+}
+
+footer{
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 10%;
+}
+
+@media only screen and (max-width: 700px){
+  table {
+    width: 80%;
+  }
+  .hiddenButton{
+    display: block;
+    text-align: center;
+    margin: auto;
+  }
+  #form{
+    display: none;
+  }
+  #canvas{
+    display: none;
+  }
+}
+@media only screen and (min-width: 700px) and (max-width: 1244px){
+  table{
+    width: 50%
+  }
+  #form{
+    display: block;
+  }
+  #canvas{
+    display: block;
+  }
+  .hiddenButton{
+    display: none;
+  }
+
+}
+
+@media only screen and (min-width: 1244px){
+  table{
+    width: 40%;
+  }
+  #form{
+    display: block;
+  }
+  .hiddenButton{
+    display: none;
+  }
+  #canvas{
+    display: block;
+  }
+}

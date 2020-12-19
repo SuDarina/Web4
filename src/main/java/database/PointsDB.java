@@ -2,6 +2,8 @@
 package database;
 
 import model.PointEntity;
+import model.User;
+
 import javax.ejb.Stateful;
 import javax.inject.Named;
 import javax.persistence.*;
@@ -25,20 +27,20 @@ public class PointsDB implements Serializable {
 
     }
 
-    public List<PointEntity> getPoints(String username) {
+    public List<PointEntity> getPoints(User user) {
+        System.out.println("in pointsDB");
         return em.createNamedQuery("pointEntity.FindByUser", PointEntity.class)
-                .setParameter("username", username).getResultStream().collect(Collectors.toList());
+                .setParameter("username", user).getResultStream().collect(Collectors.toList());
     }
 
-    public int clear(String username) {
+    public int clear(User user) {
+        System.out.println(user.getUsername());
+        List<PointEntity> pointEntities = getPoints(user);
+        for (PointEntity p: pointEntities) {
+            System.out.println(p.toString());
+            em.remove(p);
+        }
         System.out.println("pointsDb.clear");
-/*        em.createNamedQuery("pointEntity.Clear")
-                .setParameter("username", username).execute();*/
-        Query query = em.createQuery(
-                "DELETE FROM pointEntity AS point WHERE point.username = :username");
-        query.setParameter("username", username);
-        int result = query.executeUpdate();
-        System.out.println(result);
         return 1;
     }
 }

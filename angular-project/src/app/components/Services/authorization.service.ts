@@ -23,7 +23,7 @@ export class AuthorizationService {
     console.log(details.password);
     const request = new XMLHttpRequest();
     const arr = 'username=' + encodeURIComponent(details.username) + '&password=' + encodeURIComponent(details.password);
-    request.open('POST', 'http://localhost:8080/Web4-0.1/register', false);
+    request.open('POST', 'http://localhost:3350/Web4-0.1/register', false);
     request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     request.send(arr);
     ans = request.responseText;

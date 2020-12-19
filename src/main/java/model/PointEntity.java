@@ -7,7 +7,8 @@ import java.io.Serializable;
 
 @Table(name = "points")
 @NamedQuery(name = "pointEntity.FindByUser", query = "select point from pointEntity point where point.username = :username")
-@NamedQuery(name = "pointEntity.Clear", query = "delete from pointEntity point where point.username = :username")
+
+//@NamedQuery(name = "pointEntity.Clear", query = "delete from pointEntity AS point where point.username = :username")
 public class PointEntity implements Serializable {
 
     @SequenceGenerator(name = "sequence", sequenceName = "SEQUENCE", allocationSize = 1, initialValue = 1)

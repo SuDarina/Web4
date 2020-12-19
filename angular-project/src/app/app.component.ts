@@ -8,7 +8,9 @@ import {Observable} from 'rxjs';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  static API_URL = 'http://localhost:8080/Web4-0.1';
+  constructor() {
+  }
+  static API_URL = 'http://localhost:3350/Web4-0.1';
   title = 'Web_4';
   public isDark = false;
   changeTheme(): void{

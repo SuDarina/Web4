@@ -41,9 +41,9 @@ public class Points {
             return "not valid";
         }
     }
-    public int clear(String username){
+    public int clear(User user){
         System.out.println("points.clear");
-        return pointsDB.clear(username);
+        return pointsDB.clear(user);
     }
 
     private boolean validate() {
@@ -56,10 +56,12 @@ public class Points {
         return point;
     }
 
-    public String getPoints(String username) {
-    List<PointEntity> points = pointsDB.getPoints(username);
-    String ans = "";
-    for (PointEntity p :points){
+    public String getPoints(User user) {
+        System.out.println("in points");
+        List<PointEntity> points = pointsDB.getPoints(user);
+        System.out.println("returned in points");
+        String ans = "";
+        for (PointEntity p :points){
         ans = ans + "<tr>" +
                 "<td>" + p.getX() + "</td>" +
                 "<td>" + p.getY() + "</td>" +
