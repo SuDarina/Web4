@@ -22,6 +22,7 @@ public class SendPointsServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, IOException {
         try {
             String username = req.getParameter("username");
+            System.out.println(username);
             User user = userDB.findUserByUsername(username);
             String answer = points.getPoints(user);
             System.out.println(answer);

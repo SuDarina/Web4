@@ -157,17 +157,27 @@ export class GraphicComponent implements AfterViewInit {
     ctx.fillStyle = 'black';
     const size = ctx.canvas.height / 20;
     ctx.font = size.toString() + 'px Georgia';
-    ctx.fillText('-' + r.toString(), ctx.canvas.width / 8, ctx.canvas.height / 2.15);
-    ctx.fillText('-' + r.toString(), ctx.canvas.width / 1.85, 7 * ctx.canvas.height / 8);
+    if (r>0) {
+      ctx.fillText('-' + r.toString(), ctx.canvas.width / 8, ctx.canvas.height / 2.15);
+      ctx.fillText('-' + r.toString(), ctx.canvas.width / 1.85, 7 * ctx.canvas.height / 8);
 
-    ctx.fillText('-' + (r / 2).toString(), 2.5 * ctx.canvas.width / 8, ctx.canvas.height / 2.15);
-    ctx.fillText('-' + (r / 2).toString(), ctx.canvas.width / 1.85, 5.5 * ctx.canvas.height / 8);
+      ctx.fillText('-' + (r / 2).toString(), 2.5 * ctx.canvas.width / 8, ctx.canvas.height / 2.15);
+      ctx.fillText('-' + (r / 2).toString(), ctx.canvas.width / 1.85, 5.5 * ctx.canvas.height / 8);
 
+
+    } else {
+      ctx.fillText(Math.abs(r).toString(), ctx.canvas.width / 8, ctx.canvas.height / 2.15);
+      ctx.fillText(Math.abs(r).toString(), ctx.canvas.width / 1.85, 7 * ctx.canvas.height / 8);
+
+      ctx.fillText(Math.abs(r / 2).toString(), 2.5 * ctx.canvas.width / 8, ctx.canvas.height / 2.15);
+      ctx.fillText(Math.abs(r / 2).toString(), ctx.canvas.width / 1.85, 5.5 * ctx.canvas.height / 8);
+
+    }
     ctx.fillText(r.toString(), 7 * ctx.canvas.width / 8, ctx.canvas.height / 2.15);
     ctx.fillText(r.toString(), ctx.canvas.width / 1.85, ctx.canvas.height / 8);
 
     ctx.fillText((r / 2).toString(), 5.5 * ctx.canvas.width / 8, ctx.canvas.height / 2.15);
-    ctx.fillText((r / 2).toString(), ctx.canvas.width / 1.85, 2.5 * ctx.canvas.height / 8);
+    ctx.fillText( (r / 2).toString(), ctx.canvas.width / 1.85, 2.5 * ctx.canvas.height / 8);
     ctx.fill();
   }
 
@@ -179,10 +189,10 @@ export class GraphicComponent implements AfterViewInit {
   }
 
   moveDot(x, y, r): void {
-    this.drawCanvas(r);
-    if (r===''){
+    if (r===''  || isNaN(r/2)){
       r = 1;
     }
+    this.drawCanvas(r);
     const cxx = (x / r) * (7 * this.ctx.canvas.width / 8 - this.ctx.canvas.width / 2) + this.ctx.canvas.width / 2;
     const cyy = (this.ctx.canvas.height / 2) - (y / r) * (this.ctx.canvas.width / 2 - this.ctx.canvas.height / 8);
     if (this.validate(x, y, r)) {
@@ -203,6 +213,8 @@ export class GraphicComponent implements AfterViewInit {
   }
 
   canvasClick(point: PointEntity, xin, yin, rin): void {
+    const oldx = xin.value;
+    const oldy = yin.value;
     let r = rin.value;
     if (r === '') {
       r = 1;
@@ -246,11 +258,23 @@ export class GraphicComponent implements AfterViewInit {
     }
 
     document.getElementById('send').click();
+    xin.value = oldx;
+    point.x = oldx;
+    yin.value = oldy;
+    point.y = oldy;
   }
   check(point: PointEntity): boolean{
-    return (point.x < 0 && point.x > -(point.r / 2) && (point.y > 0 && point.y < point.r))
-      || ((((point.x * point.x) + (point.y * point.y)) <= ((point.r * point.r)))
-        && (point.x) > 0 && point.x < point.r)
-      || ((point.x > 0 && point.x < point.r && point.y < (point.x - point.r)));
+    if (point.r>0)
+      return (point.x >= 0 && point.y <= 0 && point.y >= point.x - point.r)
+        || (point.x >= -point.r/2 && point.y <= point.r && point.y >= 0 &&  point.x <= 0)
+        || (point.x >= 0 && point.y >= 0 && ((point.x * point.x) + (point.y * point.y)) <= ((point.r * point.r)));
+    else {
+      const x = -point.x;
+      const y = -point.y;
+      const r = -point.r;
+      return (x >= 0 && y <= 0 && y >= x - r)
+        || (x >= -r/2 && y <= r && y >= 0 &&  x <= 0)
+        || (x >= 0 && y >= 0 && ((x * x) + (y * y)) <= ((r * r)));
+    }
   }
 }

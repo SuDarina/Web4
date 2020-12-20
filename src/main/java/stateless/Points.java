@@ -20,7 +20,12 @@ public class Points {
     private PointEntity point = new PointEntity();
 
     public String addPoint(double x, double y, double r, boolean result, String username) {
-        if (validate()) {;
+        PointEntity point = new PointEntity();
+        point.setX(x);
+        point.setY(y);
+        point.setR(r);
+        point.setResult(result);
+        if (validate(point)) {
             System.out.println("Point.add works");
             PointEntity pointEntity = new PointEntity();
             User user = login.getUserByUsername(username);
@@ -46,7 +51,11 @@ public class Points {
         return pointsDB.clear(user);
     }
 
-    private boolean validate() {
+    private boolean validate(PointEntity point) {
+        System.out.println((point.getX() < 3 && point.getX() > -3) &&
+                (point.getY() < 3 && point.getY() > -3) &&
+                (point.getR() < 3 && point.getR() > -3));
+        System.out.println(point.getX() + " " + point.getY() + " " + point.getR());
         return (point.getX() < 3 && point.getX() > -3) &&
                 (point.getY() < 3 && point.getY() > -3) &&
                 (point.getR() < 3 && point.getR() > -3);

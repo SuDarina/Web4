@@ -42,10 +42,19 @@ export class MainPageComponent implements OnInit, AfterViewInit {
     }
   }
   check(): boolean{
-    return (this.point.x < 0 && this.point.x > -(this.point.r / 2) && (this.point.y > 0 && this.point.y < this.point.r))
-      || ((((this.point.x * this.point.x) + (this.point.y * this.point.y)) <= ((this.point.r * this.point.r)))
-        && (this.point.x) > 0 && this.point.x < this.point.r)
-      || ((this.point.x > 0 && this.point.x < this.point.r && this.point.y < (this.point.x - this.point.r)));
+    const point = this.point;
+    if (point.r>0)
+      return (point.x >= 0 && point.y <= 0 && point.y >= point.x - point.r)
+        || (point.x >= -point.r/2 && point.y <= point.r && point.y >= 0 &&  point.x <= 0)
+        || (point.x >= 0 && point.y >= 0 && ((point.x * point.x) + (point.y * point.y)) <= ((point.r * point.r)));
+    else {
+      const x = -point.x;
+      const y = -point.y;
+      const r = -point.r;
+      return (x >= 0 && y <= 0 && y >= x - r)
+        || (x >= -r/2 && y <= r && y >= 0 &&  x <= 0)
+        || (x >= 0 && y >= 0 && ((x * x) + (y * y)) <= ((r * r)));
+    }
   }
   addPoint(): void{
     const table = document.getElementsByTagName('table').item(0);
@@ -117,23 +126,23 @@ export class MainPageComponent implements OnInit, AfterViewInit {
     this.pointsHandlerService.logOut();
   }
 
-  validateR(): void {
-    console.log('here')
-    this.errorR = this.validateForm(this.point.r);
+  validateR(r): void {
+    console.log(this.point.r);
+    this.errorR = this.validateForm(r);
   }
-  validateX(): void {
-    this.errorX = this.validateForm(this.point.x);
+  validateX(x): void {
+    this.errorX = this.validateForm(x);
   }
-  validateY(): void {
-    this.errorY = this.validateForm(this.point.y);
+  validateY(y): void {
+    this.errorY = this.validateForm(y);
   }
   validateForm(val): string{
-    console.log(this.point.r);
     if (val <= -3 || val >= 3){
+      console.log(val)
       return 'Значение должно быть (-3..3)';
     }
     else{
-      if (!Number(val))
+      if (!Number(val) && val != 0)
         return 'не может быть текстом';
       else
         return '';
@@ -141,10 +150,12 @@ export class MainPageComponent implements OnInit, AfterViewInit {
   }
 
   validate(): boolean {
-    console.log(this.point);
-    return (this.point.x <= 3 && this.point.x >= -3)
-      && (this.point.y <= 3 && this.point.y >= -3)
-      && (this.point.r <= 3 && this.point.r >= -3) && (this.point.x !== null && true) && true && true;
+    this.validateX(this.point.x);
+    this.validateY(this.point.y);
+    this.validateR(this.point.r);
+    return (this.point.x < 3 && this.point.x > -3)
+      && (this.point.y < 3 && this.point.y > -3)
+      && (this.point.r < 3 && this.point.r > -3) && (this.point.x !== '' && this.point.y !== '' && this.point.r !== '');
   }
 
   loadPoints(): void{
@@ -153,7 +164,7 @@ export class MainPageComponent implements OnInit, AfterViewInit {
   }
 
   fillCanvas(r): void{
-    if (r === ''){
+    if (r === '' || isNaN(r/2)){
       r = 1;
     }
     const ctx = document.getElementsByTagName('canvas').item(0).getContext('2d');

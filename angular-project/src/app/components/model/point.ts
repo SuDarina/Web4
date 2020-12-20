@@ -1,7 +1,7 @@
 export class PointEntity {
-  x: number;
-  y: number;
-  r: number;
+  x;
+  y;
+  r;
   result = false;
   username = '';
   /*constructor(
