@@ -14,6 +14,15 @@
   overflow: scroll;
 }
 
+/*#copyright{*/
+/*  height: 50%;*/
+/*  overflow: no-content;*/
+/*}*/
+
+/*#img{*/
+/*  overflow: no-content;*/
+/*}*/
+
 form, table{
   margin: auto;
 }
@@ -36,7 +45,7 @@ td, th{
 }
 
 footer{
-  position: fixed;
+  /*position: fixed;*/
   left: 0;
   bottom: 0;
   width: 100%;
@@ -58,6 +67,7 @@ footer{
   #canvas{
     display: none;
   }
+
 }
 @media only screen and (min-width: 700px) and (max-width: 1244px){
   table{

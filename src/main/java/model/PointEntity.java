@@ -73,18 +73,18 @@ public class PointEntity implements Serializable {
     }
 
     public boolean check(double x, double y, double r) {
-//        return (x >= 0 && y >= 0 && x <= r && y <= r) ||
-//                (x >= 0 && y <= 0 && x * x + y * y <= Math.pow(r, 2)) || (y <= (2 * x + r) && y >= 0 && x <= 0);
+
         if (r > 0)
         return (x >= 0 && y >= 0 && ((x*x) + (y*y) <= (r*r))) || (x <= 0 && y >= 0 && y <= r && x <= r/2)
                 || (x >= 0 && y <= 0 && y >= x - r);
-        else {
+        else if (r < 0){
             double xx = -x;
             double yy = -y;
             double rr = -r;
             return (xx >= 0 && yy >= 0 && ((xx*xx) + (yy*yy) <= (rr*rr))) || (xx <= 0 && yy >= 0 && yy <= rr && x <= rr/2)
                     || (xx >= 0 && yy <= 0 && yy >= xx + rr);
-        }
+        } else
+            return false;
     }
 
 

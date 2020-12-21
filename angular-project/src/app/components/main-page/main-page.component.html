@@ -1,6 +1,7 @@
-<div class="text-center" id="content" (window:resize)="resize()">
+<div class="text-center" id="content" (window:resize)="resize(graphic, r_in.value)">
   <form class="form-signin">
     <button class="btn btn-outline-primary" (click)="logout()" routerLink="/login" style="float: right; margin-right: 5px">Sign out</button>
+    <button class="btn btn-outline-primary" style="float: left; margin-left: 5px" routerLink="/npe">Catch NPE</button>
     <div><br></div>
     <div><br></div>
     <!--    <img class="mb-4" src="/docs/4.5/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">-->
@@ -47,7 +48,7 @@
 <footer class="mastfoot mt-auto shadow-lg bg-white" id="footer" style="text-align: center">
   <div class="inner">
     <a href="https://github.com/ImLena/WebLab_4"><img style="width: 50px" src="/assets/images/icon.png" alt="github" id="img"></a><br>
-    &copy; 2020
+    <span id="copyright">&copy; 2020</span>
   </div>
 </footer>
 

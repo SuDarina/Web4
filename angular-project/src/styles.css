@@ -10,23 +10,13 @@ body{
   font-size: 12pt;
   font-style: inherit;
 }
-/*td{*/
-/*  padding: 10px;*/
-/*  margin: 0;*/
-/*  vertical-align: top;*/
-/*}*/
-/*tr{*/
-/*  margin: 0;*/
-/*}*/
-
-/*.page{*/
-/*  height: 100%;*/
-/*}*/
 
 @media only screen and (max-width: 700px) {
-  /*html, body {*/
-  /*  height: 100%;*/
-  /*}*/
+  .head-img{
+    display: none;
+  }
+}
+@media only screen and (min-width: 700px) and (max-width: 1243px){
   .head-img{
     display: none;
   }

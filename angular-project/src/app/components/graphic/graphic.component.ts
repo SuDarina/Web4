@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, Output, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, ViewChild} from '@angular/core';
 import {PointEntity} from "../model/point";
 @Component({
   selector: 'app-graphic',
@@ -189,24 +189,55 @@ export class GraphicComponent implements AfterViewInit {
   }
 
   moveDot(x, y, r): void {
-    if (r===''  || isNaN(r/2)){
-      r = 1;
+    if (r !== '0') {
+      if (r === '' || isNaN(r / 2)) {
+        r = 1;
+      }
+      this.drawCanvas(r);
+      const cxx = (x / r) * (7 * this.ctx.canvas.width / 8 - this.ctx.canvas.width / 2) + this.ctx.canvas.width / 2;
+      const cyy = (this.ctx.canvas.height / 2) - (y / r) * (this.ctx.canvas.width / 2 - this.ctx.canvas.height / 8);
+      if (this.validate(x, y, r)) {
+        this.ctx.fillStyle = '#5611BE';
+        this.drawDot(cxx, cyy);
+      }
+      console.log(x);
+      console.log(y);
+      if (document.getElementById('canvasName').innerText === 'Hide Graphic' && document.body.clientWidth < 700)
+        document.getElementById('canvas').style.display = 'block';
+      else if (document.getElementById('canvasName').innerText === 'Show Graphic' && document.body.clientWidth < 700)
+        document.getElementById('canvas').style.display = 'none';
+      else
+        document.getElementById('canvas').style.display = 'block';
+    } else {
+      this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
+      this.ctx.lineWidth = 2;
+
+      this.ctx.beginPath();
+//    оси
+//    x
+      this.ctx.moveTo(0, this.ctx.canvas.height / 2);
+      this.ctx.lineTo(this.ctx.canvas.width, this.ctx.canvas.height / 2);
+
+      // y
+      this.ctx.moveTo(this.ctx.canvas.width / 2, 0);
+      this.ctx.lineTo(this.ctx.canvas.width / 2, this.ctx.canvas.height);
+
+      this.ctx.stroke();
+      // стрелки
+      // x
+      this.ctx.beginPath();
+      this.ctx.moveTo(this.ctx.canvas.width - 10, this.ctx.canvas.height / 2 - 3);
+      this.ctx.lineTo(this.ctx.canvas.width, this.ctx.canvas.height / 2);
+      this.ctx.lineTo(this.ctx.canvas.width - 10, this.ctx.canvas.height / 2 + 3);
+      this.ctx.stroke();
+
+      // y
+      this.ctx.beginPath();
+      this.ctx.moveTo(this.ctx.canvas.width / 2 - 3, 10);
+      this.ctx.lineTo(this.ctx.canvas.width / 2, 0);
+      this.ctx.lineTo(this.ctx.canvas.width / 2 + 3, 10);
+      this.ctx.stroke();
     }
-    this.drawCanvas(r);
-    const cxx = (x / r) * (7 * this.ctx.canvas.width / 8 - this.ctx.canvas.width / 2) + this.ctx.canvas.width / 2;
-    const cyy = (this.ctx.canvas.height / 2) - (y / r) * (this.ctx.canvas.width / 2 - this.ctx.canvas.height / 8);
-    if (this.validate(x, y, r)) {
-      this.ctx.fillStyle = '#5611BE';
-      this.drawDot(cxx, cyy);
-    }
-    console.log(x);
-    console.log(y);
-    if (document.getElementById('canvasName').innerText === 'Hide Graphic' && document.body.clientWidth < 700)
-      document.getElementById('canvas').style.display = 'block';
-    else if (document.getElementById('canvasName').innerText === 'Show Graphic' && document.body.clientWidth < 700)
-      document.getElementById('canvas').style.display = 'none';
-    else
-      document.getElementById('canvas').style.display = 'block';
   }
   validate(x, y, r): boolean {
     return (((x > -3) && (x < 3)) && (((y > -3) && (y < 3))) && (((r > -3) && (r < 3))));
@@ -219,49 +250,51 @@ export class GraphicComponent implements AfterViewInit {
     if (r === '') {
       r = 1;
     }
-    const e: MouseEvent = window.event as MouseEvent;
-    const cx = e.offsetX;
-    const cy = e.offsetY;
-    const x = ((cx - this.ctx.canvas.width / 2) / (7 * this.ctx.canvas.width / 8 - this.ctx.canvas.width / 2)) * r;
-    const y = ((this.ctx.canvas.height / 2 - cy) / (this.ctx.canvas.width / 2 - this.ctx.canvas.height / 8)) * r;
-    let newx = '';
-    let newy = '';
-    if (x.toString().length > 5) {
-      for (let i = 0; i < 5; i++) {
-        newx = newx + x.toString()[i];
+    if (r !== '0') {
+      const e: MouseEvent = window.event as MouseEvent;
+      const cx = e.offsetX;
+      const cy = e.offsetY;
+      const x = ((cx - this.ctx.canvas.width / 2) / (7 * this.ctx.canvas.width / 8 - this.ctx.canvas.width / 2)) * r;
+      const y = ((this.ctx.canvas.height / 2 - cy) / (this.ctx.canvas.width / 2 - this.ctx.canvas.height / 8)) * r;
+      let newx = '';
+      let newy = '';
+      if (x.toString().length > 5) {
+        for (let i = 0; i < 5; i++) {
+          newx = newx + x.toString()[i];
+        }
+        point.x = Number(newx);
+      } else {
+        xin.value = x.toString();
+        point.x = x;
       }
-      point.x = Number(newx);
-    } else {
-      xin.value = x.toString();
-      point.x = x;
-    }
-    if (y.toString().length > 5) {
-      for (let i = 0; i < 5; i++) {
-        newy = newy + y.toString()[i];
+      if (y.toString().length > 5) {
+        for (let i = 0; i < 5; i++) {
+          newy = newy + y.toString()[i];
+        }
+        console.log(newy)
+        console.log(y)
+        yin.value = Number(newy);
+        point.y = Number(newy);
+      } else {
+        yin.value = y.toString();
+        point.y = y;
       }
-      console.log(newy)
-      console.log(y)
-      yin.value = Number(newy);
-      point.y = Number(newy);
-    } else {
-      yin.value = y.toString();
-      point.y = y;
-    }
-    rin.value = r.toString();
-    point.r = r;
-    if (this.validate(x, y, r)) {
-      if (this.check(point)){
-        this.ctx.fillStyle = 'green'
-      } else
-        this.ctx.fillStyle = 'darkred';
-      this.drawDot(cx, cy);
-    }
+      rin.value = r.toString();
+      point.r = r;
+      if (this.validate(x, y, r)) {
+        if (this.check(point)) {
+          this.ctx.fillStyle = 'green'
+        } else
+          this.ctx.fillStyle = 'darkred';
+        this.drawDot(cx, cy);
+      }
 
-    document.getElementById('send').click();
-    xin.value = oldx;
-    point.x = oldx;
-    yin.value = oldy;
-    point.y = oldy;
+      document.getElementById('send').click();
+      xin.value = oldx;
+      point.x = oldx;
+      yin.value = oldy;
+      point.y = oldy;
+    }
   }
   check(point: PointEntity): boolean{
     if (point.r>0)

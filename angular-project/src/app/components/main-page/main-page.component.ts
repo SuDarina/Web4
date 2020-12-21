@@ -85,7 +85,7 @@ export class MainPageComponent implements OnInit, AfterViewInit {
     }
     console.log('clicked');
   }
-  resize(): void{
+  resize(graphic: GraphicComponent, r): void{
     console.log('work');
     this.formName = 'Show';
     this.canvasName = 'Show';
@@ -104,6 +104,11 @@ export class MainPageComponent implements OnInit, AfterViewInit {
       but.style.display = 'none';
       canvasBut.style.display = 'none';
     }
+    if (r === '' || isNaN(r/2)){
+      r = 1;
+    }
+    graphic.drawCanvas(r);
+    this.fillCanvas(r);
   }
 
   setResult(): void{
@@ -127,13 +132,24 @@ export class MainPageComponent implements OnInit, AfterViewInit {
   }
 
   validateR(r): void {
-    console.log(this.point.r);
-    this.errorR = this.validateForm(r);
+    r = this.replaceComa(r);
+    this.point.r = r;
+    console.log(r);
+    if (r !== '0')
+      this.errorR = this.validateForm(r);
+   else
+      this.errorR = 'Невозможное значение для радиуса'
   }
   validateX(x): void {
+    x = this.replaceComa(x);
+    this.point.x = x;
+    this.replaceComa(x);
     this.errorX = this.validateForm(x);
   }
   validateY(y): void {
+    y = this.replaceComa(y);
+    this.point.y = y;
+    this.replaceComa(y);
     this.errorY = this.validateForm(y);
   }
   validateForm(val): string{
@@ -149,13 +165,27 @@ export class MainPageComponent implements OnInit, AfterViewInit {
     }
   }
 
+  replaceComa(val: any): string{
+    let newval = '';
+    for (let word of val){
+      if (word === ',') {
+        word = '.';
+      }
+      newval = newval + word;
+    }
+    console.log(newval);
+    return newval;
+  }
+
   validate(): boolean {
+
     this.validateX(this.point.x);
     this.validateY(this.point.y);
     this.validateR(this.point.r);
     return (this.point.x < 3 && this.point.x > -3)
       && (this.point.y < 3 && this.point.y > -3)
-      && (this.point.r < 3 && this.point.r > -3) && (this.point.x !== '' && this.point.y !== '' && this.point.r !== '');
+      && (this.point.r < 3 && this.point.r > -3) && (this.point.x !== '' && this.point.y !== '' && this.point.r !== '')
+      && (this.point.r !== '0');
   }
 
   loadPoints(): void{
