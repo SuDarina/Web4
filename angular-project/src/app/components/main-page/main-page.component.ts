@@ -132,7 +132,8 @@ export class MainPageComponent implements OnInit, AfterViewInit {
   }
 
   validateR(r): void {
-    r = this.replaceComa(r);
+
+      r = this.replaceComa(r);
     this.point.r = r;
     console.log(r);
     if (r !== '0')
@@ -147,7 +148,7 @@ export class MainPageComponent implements OnInit, AfterViewInit {
     this.errorX = this.validateForm(x);
   }
   validateY(y): void {
-    y = this.replaceComa(y);
+      y = this.replaceComa(y);
     this.point.y = y;
     this.replaceComa(y);
     this.errorY = this.validateForm(y);
@@ -166,15 +167,20 @@ export class MainPageComponent implements OnInit, AfterViewInit {
   }
 
   replaceComa(val: any): string{
-    let newval = '';
-    for (let word of val){
-      if (word === ',') {
-        word = '.';
+    console.log(val);
+    if (val !== '') {
+      val = val.toString();
+      let newval = '';
+      for (let word of val) {
+        if (word === ',') {
+          word = '.';
+        }
+        newval = newval + word;
       }
-      newval = newval + word;
-    }
-    console.log(newval);
-    return newval;
+      console.log(newval);
+      return newval;
+    } else
+      return val;
   }
 
   validate(): boolean {

@@ -15,6 +15,8 @@ import {TableComponent} from './components/table/table.component';
 import {UserGuard} from './user.guard';
 import {GraphicComponent} from './components/graphic/graphic.component';
 import { NpeComponent } from './components/npe/npe.component';
+import {AccordionModule} from 'primeng/accordion';     //accordion and accordion tab
+import {MenuItem} from 'primeng/api';
 
 const appRoutes: Routes = [
   {path: 'main', component: MainPageComponent, canActivate: [UserGuard]},
@@ -42,7 +44,7 @@ export const routing = RouterModule.forRoot(appRoutes);
     HttpModule,
     HttpClientModule,
     routing,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
   ],
   providers: [
     UsersHandlerService,
