@@ -126,6 +126,7 @@ export class MainPageComponent implements OnInit, AfterViewInit {
       r = 1;
     }
     canvas.drawCanvas(r);
+    canvas.moveDot(this.point.x, this.point.y, r);
   }
   logout(): void {
     this.pointsHandlerService.logOut();
