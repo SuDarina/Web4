@@ -17,13 +17,26 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  // login(): void {
+  //   const ans = this.usersHandlerService.login(this.user);
+  //   if (!(ans === '1')) {
+  //     this.errormessage = ans;
+  //   } else {
+  //    // localStorage.setItem('currentUser', ans);
+  //     this.router.navigate(['main']);
+  //   }
+  // }
   login(): void {
-    const ans = this.usersHandlerService.login(this.user);
-    if (!(ans === '1')) {
-      this.errormessage = ans;
+    if (this.user.username !== '' || this.user.password !== '') {
+      const ans = this.usersHandlerService.login(this.user);
+      if (!(ans === '1')) {
+        this.errormessage = ans;
+      } else {
+// localStorage.setItem('currentUser', ans);
+        this.router.navigate(['main']);
+      }
     } else {
-     // localStorage.setItem('currentUser', ans);
-      this.router.navigate(['main']);
+      this.errormessage = 'username and password are required';
     }
   }
 }
