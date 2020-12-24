@@ -1,3 +1,7 @@
+html, body{
+  height: 100%;
+}
+
 #send{
   border: 1px solid darkcyan;
   color: darkcyan;
@@ -14,22 +18,9 @@
   overflow: scroll;
 }
 
-/*#copyright{*/
-/*  height: 50%;*/
-/*  overflow: no-content;*/
-/*}*/
-
-/*#img{*/
-/*  overflow: no-content;*/
-/*}*/
-
 form, table{
   margin: auto;
 }
-
-/*div{*/
-/*  height: 100%;*/
-/*}*/
 
 td, th{
   text-align: center;
