@@ -65,8 +65,9 @@ public class Points {
         return point;
     }
 
-    public String getPoints(User user) {
-        System.out.println("in points");
+    public String getPoints(String username) {
+        System.out.println("in points" + username);
+        User user = login.getUserByUsername(username);
         List<PointEntity> points = pointsDB.getPoints(user);
         System.out.println("returned in points");
         String ans = "";
