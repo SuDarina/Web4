@@ -7,7 +7,6 @@ import {RouterModule, Routes} from '@angular/router';
 import {HashLocationStrategy, LocationStrategy} from '@angular/common';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
-// import {HttpModule} from '@angular/http';
 import {UsersHandlerService} from './components/Services/users-handler.service';
 import { LoginComponent } from './components/login/login.component';
 import {PointsHandlerService} from './components/Services/points-handler.service';
@@ -16,7 +15,6 @@ import {UserGuard} from './user.guard';
 import {GraphicComponent} from './components/graphic/graphic.component';
 import { NpeComponent } from './components/npe/npe.component';
 import {InputTextModule} from "primeng/inputtext";
-// import {InputTextModule} from 'primeng/inpuText'
 
 const appRoutes: Routes = [
   {path: 'main', component: MainPageComponent, canActivate: [UserGuard]},
@@ -41,12 +39,9 @@ export const routing = RouterModule.forRoot(appRoutes);
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    // HttpModule,
-    // HttpClientModule,
     routing,
     RouterModule.forRoot(appRoutes),
     InputTextModule,
-    // InputTextModule
   ],
   providers: [
     UsersHandlerService,

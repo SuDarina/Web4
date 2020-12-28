@@ -41,6 +41,15 @@ export class MainPageComponent implements OnInit, AfterViewInit {
       this.addPoint();
     }
   }
+  addPoint(): void{
+    const table = document.getElementsByTagName('table').item(0);
+    const row = table.insertRow(table.rows.length);
+    row.insertCell(0).innerHTML = String(this.point.x);
+    row.insertCell(1).innerHTML = String(this.point.y);
+    row.insertCell(2).innerHTML = String(this.point.r);
+    row.insertCell(3).innerHTML = String(this.point.result);
+    this.pointsHandlerService.addPoint(this.point);
+  }
   check(): boolean{
     const point = this.point;
     if (point.r>0)
@@ -55,15 +64,6 @@ export class MainPageComponent implements OnInit, AfterViewInit {
         || (x >= -r/2 && y <= r && y >= 0 &&  x <= 0)
         || (x >= 0 && y >= 0 && ((x * x) + (y * y)) <= ((r * r)));
     }
-  }
-  addPoint(): void{
-    const table = document.getElementsByTagName('table').item(0);
-    const row = table.insertRow(table.rows.length);
-    row.insertCell(0).innerHTML = String(this.point.x);
-    row.insertCell(1).innerHTML = String(this.point.y);
-    row.insertCell(2).innerHTML = String(this.point.r);
-    row.insertCell(3).innerHTML = String(this.point.result);
-    this.pointsHandlerService.addPoint(this.point);
   }
   click(id: string): void{
     const form = document.getElementById(id);

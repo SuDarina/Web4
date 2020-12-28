@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { share } from 'rxjs/operators';
-import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-root',

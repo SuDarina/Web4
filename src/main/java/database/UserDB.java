@@ -13,23 +13,9 @@ import java.util.List;
 @Named("userDB")
 @Stateful
 public class UserDB {
-    /*List<User> users;
-    public void addNewUser(User user) {
-        users.add(user);
-
-    }
-
-    public User getUser(String username) {
-        return users.get(0);
-    }*/
     private final EntityManager em = Persistence.
             createEntityManagerFactory("Web_4").
             createEntityManager();
- /*   @PersistenceUnit(unitName = "Web_4")
-    private EntityManagerFactory entityManagerFactory;
-    @Resource
-    private UserTransaction ut;
-    EntityManager em = entityManagerFactory.createEntityManager();*/
 
     public void addNewUser(User user) {
         try {

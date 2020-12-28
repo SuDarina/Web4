@@ -16,7 +16,7 @@ public class PointsServlet extends HttpServlet {
     private Points points;
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         try {
             System.out.println(req.getParameter("x"));
             System.out.println(req.getParameter("y"));
@@ -25,7 +25,6 @@ public class PointsServlet extends HttpServlet {
             double y = Double.parseDouble(req.getParameter("y"));
             double r = Double.parseDouble(req.getParameter("r"));
             boolean result = Boolean.parseBoolean(req.getParameter("result"));
-            System.out.println(req.getParameter("username"));
             String username = req.getParameter("username");
             System.out.println("works" + x + y + r);
             points.addPoint(x,y,r, result, username);

@@ -3,7 +3,6 @@ package Servlets;
 import stateless.Login;
 
 import javax.ejb.EJB;
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -18,8 +17,6 @@ public class RegisterServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
-        System.out.println("works " + username);
-        System.out.println("pas=" + password);
         String usr = login.register(username, password);
         if (usr != null) {
             resp.addHeader("Access-Control-Allow-Origin", "http://localhost:3355");

@@ -21,9 +21,7 @@ public class SendPointsServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, IOException {
         try{
             String username = req.getParameter("username");
-            System.out.println("in sendServlet "+username);
             String answer = points.getPoints(username);
-            System.out.println(answer);
             if (answer.equals("Register")) {
                 resp.setStatus(403);
             }

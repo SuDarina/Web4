@@ -17,12 +17,10 @@ public class Login {
 
     public String register(String username, String password){
         System.out.println("Login.register works");
-        System.out.println(username+password);
         if (userDB.findUserByUsername(username) == null){
             User user = new User();
             user.setUsername(username);
             user.setPassword(hash(password));
-            System.out.println("Login.register still works"+user.getUsername());
             userDB.addNewUser(user);
             return user.getUsername();
         } else{

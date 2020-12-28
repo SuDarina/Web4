@@ -1,17 +1,11 @@
 <div class="text-center">
   <form class="form-signin" name="signin" (ngSubmit)="register()" #f="ngForm" novalidate>
-    <!--    <img class="mb-4" src="/docs/4.5/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">-->
     <h1 class="h3 mb-3 font-weight-normal">Please sign up</h1>
     <label for="inputEmail" class="sr-only">Login</label>
     <input type="text" id="inputEmail" class="form-control" placeholder="Login" name="login" [(ngModel)]="user.username" required autofocus>
     <div><br></div>
     <label for="inputPassword" class="sr-only">Password</label>
     <input type="password" id="inputPassword" class="form-control" name="password" placeholder="Password" [(ngModel)]="user.password"  required>
-<!--    <div class="checkbox mb-3">-->
-<!--      <label>-->
-<!--        <input type="checkbox" value="remember-me"> Remember me-->
-<!--      </label>-->
-<!--    </div>-->
     <div><br></div>
     <div>{{errormessage}}</div>
     <button class="btn btn-lg btn-primary btn-block" id="button" type="submit">Sign up</button>

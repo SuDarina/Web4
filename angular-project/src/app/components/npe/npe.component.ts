@@ -5,9 +5,7 @@ import {Router} from '@angular/router';
   selector: 'app-npe',
   templateUrl: './npe.component.html',
   styleUrls: ['./npe.component.css'],
-  animations: [
-    // animation triggers go here
-  ]
+  animations: []
 })
 export class NpeComponent implements OnInit {
 
@@ -16,16 +14,4 @@ export class NpeComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  move(): void{
-   /* document.getElementById('npe').animate({
-        down: Math.random() * 300
-      }, 100);
-    document.getElementById('npe').animate({
-        right: Math.random() * 300
-      }, 100);
-*/
-    }
-    win(): void{
-     // this.router.navigate(['win']);
-    }
 }

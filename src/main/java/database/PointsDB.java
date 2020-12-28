@@ -34,10 +34,8 @@ public class PointsDB implements Serializable {
     }
 
     public int clear(User user) {
-        System.out.println(user.getUsername());
         List<PointEntity> pointEntities = getPoints(user);
         for (PointEntity p: pointEntities) {
-            System.out.println(p.toString());
             em.remove(p);
         }
         System.out.println("pointsDb.clear");

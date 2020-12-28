@@ -4,13 +4,10 @@
     <button class="btn btn-outline-primary" style="float: left; margin-left: 5px" routerLink="/npe">Catch NPE</button>
     <div><br></div>
     <div><br></div>
-    <!--    <img class="mb-4" src="/docs/4.5/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">-->
     <h1 class="h3 mb-3 font-weight-normal">Заполните форму или нажмите на изображение </h1>
     <a id="hiddenButton" style="margin: auto" class="hiddenButton" (click)="click('form')">{{formName}} Form</a>
     <div class="child" style="float: right">
-<!--      <button class="btn btn-outline-primary" (click)="logout()" routerLink="/login">Sign out</button>-->
     </div>
-    <!--    <button id="hiddenCanvas" style="margin: 2px" type="button" class="btn btn-outline-primary hiddenButton" (click)="click('canvas')">Graphic</button>-->
     <form id="form" #f="ngForm" (ngSubmit)="clickButton()" novalidate>
       <label for="x_in">Введите x:</label><br>
       <input type="text" id="x_in" pInputText placeholder="(-3, 3)" name="x" maxlength="5" #x_in (input)="validateX(x_in.value);graphic.moveDot(x_in.value, y_in.value, r_in.value);fillCanvas(r_in.value)" [(ngModel)]="point.x" #x="ngModel" required/><br>

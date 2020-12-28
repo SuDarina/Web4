@@ -19,7 +19,6 @@ public class SignServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, IOException {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
-        System.out.println("pas=" + password);
         String result = login.login(username, password);
         resp.addHeader("Access-Control-Allow-Origin", "http://localhost:3355");
         resp.addHeader("Access-Control-Allow-Methods", "GET,POST,OPTIONS,DELETE,PUT");

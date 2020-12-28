@@ -19,7 +19,7 @@ public class ClearServlet extends HttpServlet {
     private UserDB userDB = new UserDB();
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         try {
             String clear = req.getParameter("clear");
             String username = req.getParameter("username");

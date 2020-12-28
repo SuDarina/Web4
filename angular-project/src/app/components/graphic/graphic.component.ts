@@ -183,11 +183,23 @@ export class GraphicComponent implements AfterViewInit {
 
   drawDot(cx, cy): void {
     this.ctx.beginPath();
-    // this.ctx.fillStyle = '#5611BE';
     this.ctx.arc(cx, cy, this.ctx.canvas.height / 100, 0, Math.PI * 2);
     this.ctx.fill();
   }
-
+  check(point: PointEntity): boolean{
+    if (point.r>0)
+      return (point.x >= 0 && point.y <= 0 && point.y >= point.x - point.r)
+        || (point.x >= -point.r/2 && point.y <= point.r && point.y >= 0 &&  point.x <= 0)
+        || (point.x >= 0 && point.y >= 0 && ((point.x * point.x) + (point.y * point.y)) <= ((point.r * point.r)));
+    else {
+      const x = -point.x;
+      const y = -point.y;
+      const r = -point.r;
+      return (x >= 0 && y <= 0 && y >= x - r)
+        || (x >= -r/2 && y <= r && y >= 0 &&  x <= 0)
+        || (x >= 0 && y >= 0 && ((x * x) + (y * y)) <= ((r * r)));
+    }
+  }
   moveDot(x, y, r): void {
     if (r !== '0') {
       if (r === '' || isNaN(r / 2)) {
@@ -294,20 +306,6 @@ export class GraphicComponent implements AfterViewInit {
       point.x = oldx;
       yin.value = oldy;
       point.y = oldy;
-    }
-  }
-  check(point: PointEntity): boolean{
-    if (point.r>0)
-      return (point.x >= 0 && point.y <= 0 && point.y >= point.x - point.r)
-        || (point.x >= -point.r/2 && point.y <= point.r && point.y >= 0 &&  point.x <= 0)
-        || (point.x >= 0 && point.y >= 0 && ((point.x * point.x) + (point.y * point.y)) <= ((point.r * point.r)));
-    else {
-      const x = -point.x;
-      const y = -point.y;
-      const r = -point.r;
-      return (x >= 0 && y <= 0 && y >= x - r)
-        || (x >= -r/2 && y <= r && y >= 0 &&  x <= 0)
-        || (x >= 0 && y >= 0 && ((x * x) + (y * y)) <= ((r * r)));
     }
   }
 }
