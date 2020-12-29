@@ -10,7 +10,6 @@ import {FormsModule} from '@angular/forms';
 import {UsersHandlerService} from './components/Services/users-handler.service';
 import { LoginComponent } from './components/login/login.component';
 import {PointsHandlerService} from './components/Services/points-handler.service';
-import {TableComponent} from './components/table/table.component';
 import {UserGuard} from './user.guard';
 import {GraphicComponent} from './components/graphic/graphic.component';
 import { NpeComponent } from './components/npe/npe.component';
@@ -31,7 +30,6 @@ export const routing = RouterModule.forRoot(appRoutes);
     MainPageComponent,
     AuthorizationComponent,
     LoginComponent,
-    TableComponent,
     GraphicComponent,
     NpeComponent
   ],
